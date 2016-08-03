@@ -1,6 +1,6 @@
 @echo off
 :: necrobat.bat - a simple batch script for NecroBot
-:: Copyright (C) 2016  Mataha  <[email protected]>
+:: Copyright (C) 2016  Mataha  <mataha@users.noreply.github.com>
 :: 
 :: This program is free software: you can redistribute it and/or modify
 :: it under the terms of the GNU General Public License as published by
