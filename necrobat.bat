@@ -161,7 +161,7 @@ if "_%~1" equ "_" (
 ) else (
   if "_%~1" neq "_%_handler_arg%" (
     %necrobat_echo% This script doesn't support command line options.
-    %necrobat_echo% You've supplied the following options: '%*'
+    %necrobat_echo% The following options have been supplied: '%*'
     %necrobat_usage%
     
     %necrobat_exit% %_EXIT_FAILURE%
@@ -176,7 +176,7 @@ if "_%~1" equ "_" (
 %necrobat_echo% %_script_name% %_script_version% - written by %_script_author%
 %necrobat_echo% Initializing...
 
-:: Cleanup.
+:: Cleanup after update. This has to be done before the infinite loop.
 if exist "%_script_file%" erase /Q "%_renamed_script_file%" >nul 2>&1
 
 :forever
