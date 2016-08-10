@@ -216,3 +216,5 @@ goto forever
 :: There is no way to nicely reset the text color, so we might be stuck
 :: with a leftover color from the bot. Nothing we can do about it.
 :EOF
+
+::~charlimit:79
