@@ -1,5 +1,8 @@
 # necrobat
 
+A really simple batch script for NecroBot. Handles updates, disconnects from
+the server and sudden bot crashes.
+
 ## Installation
 
  1. Make sure you have the following dependencies:
