@@ -170,7 +170,7 @@ if "_%~1" equ "_" (
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:: Main loop.
+:: Main.
 :main
 
 %necrobat_echo% %_script_name% %_script_version% - written by %_script_author%
@@ -179,6 +179,7 @@ if "_%~1" equ "_" (
 :: Cleanup after update. This has to be done before the infinite loop.
 if exist "%_script_file%" erase /Q "%_renamed_script_file%" >nul 2>&1
 
+:: Main loop.
 :forever
 
 %necrobat_echo% Starting %_bot_name%...
