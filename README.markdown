@@ -50,4 +50,5 @@ Halted. Feel free to fork this project.
 
 ## License
 
-GPLv3. See [LICENSE](https://github.com/mataha/necrobat/blob/master/LICENSE.txt) for details.
+Distributed under the same terms as NecroBot itself, thus GPLv3.
+See [LICENSE](https://github.com/mataha/necrobat/blob/master/LICENSE.txt) for details.
