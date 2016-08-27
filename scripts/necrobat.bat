@@ -180,8 +180,6 @@ if "_%~1" equ "_" (
 :: Cleanup after update. This has to be done before the loop.
 if exist "%_script_file%" erase /Q "%_renamed_script_file%" >nul 2>&1
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 :forever
 
 %necrobat_echo% Starting %_bot_name%...
