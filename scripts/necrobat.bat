@@ -1,5 +1,5 @@
 @echo off
-:: necrobat.bat - a simple batch script for NecroBot
+:: necrobat - a simple batch script for NecroBot
 :: Copyright (C) 2016  Mataha  <mataha@users.noreply.github.com>
 :: 
 :: This program is free software: you can redistribute it and/or modify
@@ -14,6 +14,8 @@
 :: 
 :: You should have received a copy of the GNU General Public License
 :: along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+:: necrobat.bat - the main script
 
 setlocal EnableExtensions EnableDelayedExpansion
 set "_script_author=Mataha"
@@ -54,12 +56,15 @@ set "_renamed_extension=.old"
 set "_renamed_script_file=%_script_file%%_renamed_extension%"
 set "_renamed_script=%~dp0%_renamed_script_file%"
 
-set /A "_TIME_MINUTE=60"
-set /A "_TIME_HOUR=60*%_TIME_MINUTE%"
-
 :: +--------------------------------------------------------------------------+
 :: |                         Public global variables                          |
 :: +--------------------------------------------------------------------------+
+
+::@ A minute.
+set /A "_TIME_MINUTE=60"
+
+::@ An hour.
+set /A "_TIME_HOUR=60*%_TIME_MINUTE%"
 
 ::@ Success return code (`0` by convention).
 set /A "_EXIT_SUCCESS=0"
@@ -70,7 +75,7 @@ set /A "_EXIT_FAILURE=1"
 ::@ Time between bot restarts. Used to check if there's an update; serves
 ::@   as a sanity check against uncaught exceptions in the binary as well.
 ::@   Set to an hour by default.
-set /A "_necrobat_restart_delay=%_TIME_HOUR%"
+set /A "_necrobat_RESTART_DELAY=%_TIME_HOUR%"
 
 :: +--------------------------------------------------------------------------+
 :: |                             Inline functions                             |
@@ -80,7 +85,7 @@ set "botkill=taskkill /F /IM "%_bot_binary%" /T >nul 2>&1"
 
 set "reset_title=title %ComSpec%>nul 2>&1"
 
-::@ An idiom for `timeout >nul 2>&1 /NOBREAK /T`.
+::@ A poor imitation of POSIX's `sleep`.
 ::@
 ::@  param %1  the length of time to sleep in seconds
 ::@
@@ -116,7 +121,7 @@ set "necrobat_rename=rename "%_renamed_script%" "%_script_file%" >nul 2>&1"
 
 ::@ Sleeps for an amount of time specified by `%necrobat_restart_delay%`.
 ::@
-set "necrobat_sleep=%sleep% "%_necrobat_restart_delay%" || goto error"
+set "necrobat_sleep=%sleep% "%_necrobat_RESTART_DELAY%" || goto error"
 
 ::@ Starts the bot in background. Sets the command prompt's title to a non-nul
 ::@   value in order to avoid the nul-title job bug. Wish there was a better
@@ -168,18 +173,20 @@ if "_%~1" equ "_" (
   )
 )
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: +--------------------------------------------------------------------------+
+:: |                                 Executor                                 |
+:: +--------------------------------------------------------------------------+
 
-:: Main.
 :main
 
 %necrobat_echo% %_script_name% %_script_version% - written by %_script_author%
 %necrobat_echo% Initializing...
 
-:: Cleanup after update. This has to be done before the infinite loop.
+:: Cleanup after update. This has to be done before the loop.
 if exist "%_script_file%" erase /Q "%_renamed_script_file%" >nul 2>&1
 
-:: Main loop.
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :forever
 
 %necrobat_echo% Starting %_bot_name%...
@@ -194,26 +201,24 @@ if exist "%_script_file%" erase /Q "%_renamed_script_file%" >nul 2>&1
 %necrobat_stop%
 %necrobat_echo% Terminated the previous %_bot_name% instance.
 
-:: In case of a really, REALLY unexpected update.
-:: By the way, AutoUpdate setting should be set to false as of 0.4.0+!
+:: In case of a really unexpected update.
+:: NB AutoUpdate setting should be set to `false` as of 0.4.0+, but...
 %necrobat_rename% && %necrobat_echo% Detected an update - renamed the script.
 
-:: End of main loop.
 goto forever
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:: Error handler.
 :error
 
 %necrobat_echo% Fatal error - something went totally wrong^^! >&2
 
-:: Return control to the parent script.
+:: Unwind control to the parent script.
 %necrobat_echo% Unwinding... >&2
 %necrobat_exit% %_EXIT_FAILURE% >&2
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: There is no way to nicely reset the text color, so we might be stuck
-:: with a leftover color from the bot. Nothing we can do about it.
+:: with a leftover color from the bot. Nothing we can do about it from batch.
 :EOF
