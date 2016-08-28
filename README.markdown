@@ -24,7 +24,7 @@ the server and sudden bot crashes.
 Alternatively, you can download the source as a [zip] and install it manually,
 thus avoiding using Git.
 
-[zip]: https://github.com/mataha/necrobat/archive/master.zip
+[zip]: archive/master.zip
 
 ## Usage
 
@@ -34,12 +34,11 @@ necrobat
     
 ## Configuration 
 
-If `NecroBot.exe` and `Config\` reside in the same directory as the main script,
-you're fully set.
+If `NecroBot.exe` and `Config\` reside in the same directory as the main
+script, you're fully set.
 
-Otherwise, see the
-[main script](https://github.com/mataha/necrobat/blob/master/scripts/necrobat.bat)
-for details on configuring.
+Otherwise, see the [main script](scripts/necrobat.bat) for details
+on configuring.
 
 ## Development
 
@@ -48,4 +47,4 @@ Halted. Feel free to fork this project.
 ## License
 
 Distributed under the same terms as NecroBot itself, thus GPLv3.
-See [LICENSE](https://github.com/mataha/necrobat/blob/master/LICENSE.txt) for details.
+See [LICENSE](LICENSE.txt) for details.
