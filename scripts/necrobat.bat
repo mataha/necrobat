@@ -18,11 +18,12 @@
 :: necrobat.bat - the main script
 
 setlocal EnableExtensions EnableDelayedExpansion
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 set "_script_author=Mataha"
 set "_script_name=%~n0"
 set "_script_version=1.1"
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: +--------------------------------------------------------------------------+
 :: |                             Global variables                             |
@@ -194,7 +195,7 @@ if exist "%_script_file%" erase /Q "%_renamed_script_file%" >nul 2>&1
 %necrobat_stop%
 %necrobat_echo% Terminated the previous %_bot_name% instance.
 
-:: In case of a really unexpected update.
+:: In case of a really unexpected update during the iteration.
 :: NB AutoUpdate setting should be set to `false` as of 0.4.0+, but...
 %necrobat_rename% && %necrobat_echo% Detected an update - renamed the script.
 
@@ -205,9 +206,7 @@ goto forever
 :error
 
 %necrobat_echo% Fatal error - something went totally wrong^^! >&2
-
-:: Unwind control to the parent script.
-%necrobat_echo% Unwinding... >&2
+%necrobat_echo% Unwinding control to the parent script... >&2
 %necrobat_exit% %_EXIT_FAILURE% >&2
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
