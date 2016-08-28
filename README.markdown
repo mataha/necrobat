@@ -24,7 +24,7 @@ the server and sudden bot crashes.
 Alternatively, you can download the source as a [zip] and install it manually,
 thus avoiding using Git.
 
-[zip]: archive/master.zip
+[zip]: https://github.com/mataha/necrobat/archive/master.zip
 
 ## Usage
 
