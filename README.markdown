@@ -42,7 +42,7 @@ on configuring.
 
 ## Development
 
-Halted. Feel free to fork this project.
+Halted - I'm just fixing small mistakes. Feel free to fork this project.
 
 ## License
 

@@ -23,7 +23,7 @@ setlocal EnableExtensions EnableDelayedExpansion
 
 set "_script_author=Mataha"
 set "_script_name=%~n0"
-set "_script_version=1.1"
+set "_script_version=1.2"
 
 :: +--------------------------------------------------------------------------+
 :: |                             Global variables                             |
